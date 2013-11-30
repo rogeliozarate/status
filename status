@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+default_dir = "/Users/user/code"
+ongoing_projects = ["project1", "project2", "website","status"]
+
+
+class String
+  # colorization
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+
+  def red
+    colorize(31)
+  end
+
+  def green
+    colorize(32)
+  end
+
+  def yellow
+    colorize(33)
+  end
+
+  def pink
+    colorize(35)
+  end
+  
+  def white
+    colorize(37)
+  end  
+end
+
+
+
+ongoing_projects.each do |project|
+
+  Dir.chdir "#{default_dir}/#{project}"
+  git_status =`git status --porcelain`
+  git_branch = `git symbolic-ref --short -q HEAD`
+  git_last_commit_date = `git log -1 --format="%ci"`
+  git_last_commit_message = `git log -1`
+
+  puts "Project:          #{project}".white
+  puts "Last commit date: #{git_last_commit_date}".white
+  puts "Current branch:   #{git_branch}".green
+  puts "Current status:   #{git_status}".red
+  puts "Last commit msg:  #{git_last_commit_message}".pink
+end
