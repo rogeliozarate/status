@@ -9,5 +9,7 @@ I did not want gems or extenal dependencies: Pure Ruby, BASH, and GIT.
 
 ### ToDo
 - Put ongoing projects in a separate file
+
   It will be easier to add/remove a project with a BASH script
+
 - Next iteration will be pure BASH ;)
